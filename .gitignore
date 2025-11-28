@@ -53,4 +53,6 @@ CodeCoverage/
 TestResult.xml
 nunit-*.xml
 
+# I ignore that
 .idea/
+Strava.Automations.sln.DotSettings.user
