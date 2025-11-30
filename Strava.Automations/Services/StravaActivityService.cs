@@ -12,13 +12,16 @@ public static class StravaActivityService
         var outubro2025 = new DateTime(2025, 10, 1, 0, 0, 0, DateTimeKind.Utc);
 
         var atividades = await StravaApi.ObterAtividades(accessToken, outubro2025);
-        var atividadesDescalco = atividades.Where(a => a.IdTenis == null).ToList();
-
-        Console.WriteLine($"Atividades descalço: {atividadesDescalco.Count}");
-
-        foreach (var a in atividadesDescalco)
+        if (atividades != null)
         {
-            await StravaApi.AtualizarTenisParaAtividade(a.Id, IdTenisOlympikusMarte, accessToken);
+            var atividadesDescalco = atividades.Where(a => a.IdTenis == null).ToList();
+
+            Console.WriteLine($"Atividades descalço: {atividadesDescalco.Count}");
+
+            foreach (var a in atividadesDescalco)
+            {
+                await StravaApi.AtualizarTenisParaAtividade(a.Id, IdTenisOlympikusMarte, accessToken);
+            }
         }
     }
 }
